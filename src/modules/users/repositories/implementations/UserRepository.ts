@@ -1,4 +1,5 @@
 import { getRepository, Repository } from "typeorm";
+import { deleteFile } from "../../../../utils/file";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUpdateUserDTO } from "../../dtos/IUpdateUsersDTO";
 import { User } from "../../entities/User";
@@ -43,7 +44,11 @@ class UserRepository implements IUserRepository {
         })
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: string, avatar: string): Promise<void> {
+        const user = await this.repository.findOne(id)
+
+        await deleteFile(`./users_avatars/${user.avatar}`)
+
         await this.repository.delete(id)
     }
 }

@@ -7,7 +7,7 @@ interface IUserRepository {
     findById(id: string): Promise<User>
     findByEmail(email: string): Promise<User>
     update(data: ICreateUserDTO): Promise<void>
-    delete(id: string): Promise<void>
+    delete(id: string, avatar: string): Promise<void>
 }
 
 export { IUserRepository }
