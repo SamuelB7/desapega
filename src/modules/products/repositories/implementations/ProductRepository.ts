@@ -12,7 +12,7 @@ class ProductRepository implements IProductRepository {
         this.repository = getRepository(Product)
     }
 
-    async create({name, description, user_id, category_id}: ICreateProductDTO): Promise<void> {
+    async create({name, description, user_id, category_id}: ICreateProductDTO): Promise<Product> {
         const product = await this.repository.create({
             name,
             description,
@@ -21,6 +21,8 @@ class ProductRepository implements IProductRepository {
         })
 
         await this.repository.save(product)
+
+        return product
     }
 
     async findAllByName(name: string): Promise<Product[]> {
@@ -33,8 +35,8 @@ class ProductRepository implements IProductRepository {
         return product
     }
 
-    async update(data: IUpdateProductDTO): Promise<void> {
-        throw new Error("Method not implemented.");
+    async update({id, name, description, user_id, category_id}: IUpdateProductDTO): Promise<void> {
+        await this.repository.update(id, {name, description, user_id, category_id})
     }
 
     async delete(id: string): Promise<void> {
