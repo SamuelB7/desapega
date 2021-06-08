@@ -17,6 +17,10 @@ export class productsPhotos1622838945888 implements MigrationInterface {
                         type: 'varchar'
                     },
                     {
+                        name: 'price',
+                        type: 'numeric'
+                    },
+                    {
                         name: 'product_id',
                         type: 'uuid'
                     }

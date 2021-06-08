@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from 'uuid'
 
 @Entity()
-class Products_photos {
+class ProductsPhotos {
 
     @PrimaryColumn()
     id: string 
@@ -20,4 +20,4 @@ class Products_photos {
     }
 }
 
-export { Products_photos }
+export { ProductsPhotos }

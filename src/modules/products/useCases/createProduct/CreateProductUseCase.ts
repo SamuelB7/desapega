@@ -10,12 +10,13 @@ class CreateProductUseCase {
         private productRepository: IProductRepository
     ) {}
 
-    async execute({name, description, user_id, category_id}: ICreateProductDTO): Promise<Product> {
+    async execute({name, description, user_id, category_id, price}: ICreateProductDTO): Promise<Product> {
         const product = await this.productRepository.create({
             name,
             description,
             user_id,
-            category_id
+            category_id,
+            price
         }) 
 
         return product

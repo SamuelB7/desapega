@@ -12,12 +12,13 @@ class ProductRepository implements IProductRepository {
         this.repository = getRepository(Product)
     }
 
-    async create({name, description, user_id, category_id}: ICreateProductDTO): Promise<Product> {
+    async create({name, description, user_id, category_id, price}: ICreateProductDTO): Promise<Product> {
         const product = await this.repository.create({
             name,
             description,
             user_id,
-            category_id
+            category_id,
+            price
         })
 
         await this.repository.save(product)
@@ -26,7 +27,16 @@ class ProductRepository implements IProductRepository {
     }
 
     async findAllByName(name: string): Promise<Product[]> {
-        const products = await this.repository.find({name})
+        const products = await this.repository.query(
+            `
+            SELECT DISTINCT  products.*, file
+            FROM products, products_photos
+            WHERE products.id = products_photos.product_id
+            AND products.name ILIKE '%${name}%'
+            ORDER BY products.id
+            `
+        )
+        
         return products
     }
 

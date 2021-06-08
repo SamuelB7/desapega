@@ -7,11 +7,11 @@ import { ProductsPhotosUseCase } from "./ProductsPhotosUseCase";
 class CreateProductController {
     async handle(request: Request, response: Response): Promise<Response> {
         try {   
-            const {name, description, user_id, category_id} = request.body
+            const {name, description, user_id, category_id, price} = request.body
             const files = request.files as Array<any>
 
             const createProductUseCase = container.resolve(CreateProductUseCase)
-            const product = await createProductUseCase.execute({name, description, user_id, category_id})
+            const product = await createProductUseCase.execute({name, description, user_id, category_id, price})
 
             const productsPhotosUseCase = container.resolve(ProductsPhotosUseCase)
 

@@ -1,5 +1,5 @@
 import { getRepository, Repository } from "typeorm";
-import { Products_photos } from "../../entities/Products_photos";
+import { ProductsPhotos } from "../../entities/ProductsPhotos";
 import { IPhotosRepository } from "../IPhotosRepository";
 
 interface IRequest {
@@ -8,10 +8,10 @@ interface IRequest {
 }
 
 class PhotosRepository implements IPhotosRepository {
-    private repository: Repository<Products_photos>
+    private repository: Repository<ProductsPhotos>
 
     constructor() {
-        this.repository = getRepository(Products_photos)
+        this.repository = getRepository(ProductsPhotos)
     }
 
     async create({file, product_id}: IRequest): Promise<void> {
@@ -23,7 +23,7 @@ class PhotosRepository implements IPhotosRepository {
         await this.repository.save(photo)
     }
 
-    async findAllByProductId(product_id: string): Promise<Products_photos[]> {
+    async findAllByProductId(product_id: string): Promise<ProductsPhotos[]> {
         const photos = await this.repository.find({product_id})
         return photos
     }
