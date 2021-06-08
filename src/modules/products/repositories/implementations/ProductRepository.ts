@@ -29,9 +29,9 @@ class ProductRepository implements IProductRepository {
     async findAllByName(name: string): Promise<Product[]> {
         const products = await this.repository.query(
             `
-            SELECT DISTINCT  products.*, file
-            FROM products, products_photos
-            WHERE products.id = products_photos.product_id
+            SELECT DISTINCT ON (products.id) products.*, products_photos.file
+            FROM products
+            JOIN products_photos ON products.id = products_photos.product_id
             AND products.name ILIKE '%${name}%'
             ORDER BY products.id
             `

@@ -10,7 +10,8 @@ class FindAllByNameController {
         const findAllByNameUseCase = container.resolve(FindAllByNameUseCase)
 
         const products = await findAllByNameUseCase.execute(name)
-        //console.log(products)
+    
+        
         return response.json(products)
     }
 }
