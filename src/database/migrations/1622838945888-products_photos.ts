@@ -8,6 +8,11 @@ export class productsPhotos1622838945888 implements MigrationInterface {
                 name: 'products_photos',
                 columns: [
                     {
+                        name: 'id',
+                        type: 'uuid',
+                        isPrimary: true
+                    },
+                    {
                         name: 'file',
                         type: 'varchar'
                     },

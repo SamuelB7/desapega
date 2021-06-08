@@ -8,18 +8,19 @@ class CreateProductController {
     async handle(request: Request, response: Response): Promise<Response> {
         try {   
             const {name, description, user_id, category_id} = request.body
-            const files = request.files.map as Array<any>
+            const files = request.files as Array<any>
 
             const createProductUseCase = container.resolve(CreateProductUseCase)
             const product = await createProductUseCase.execute({name, description, user_id, category_id})
 
             const productsPhotosUseCase = container.resolve(ProductsPhotosUseCase)
 
-            files.forEach(photo => {
-                
-                productsPhotosUseCase.execute()
+            files.forEach(async photo => {
+                const file = photo.filename
+                const product_id = product.id
+                await productsPhotosUseCase.execute(file, product_id)
             });
-
+            
             return response.status(201).send()
         } catch (error) {
             return response.json(error.message)
