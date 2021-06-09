@@ -26,6 +26,15 @@ class ProductRepository implements IProductRepository {
         return product
     }
 
+    async findAllByCategory(category_id: string): Promise<Product[]> {
+        throw new Error("Method not implemented.");
+    }
+
+    async findAll(): Promise<Product[]> {
+        const products = await this.repository.find()
+        return products
+    }
+
     async findAllByName(name: string): Promise<Product[]> {
         const products = await this.repository.query(
             `
