@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateSessionUseCase } from "./createSessionUseCase";
+import { CreateSessionUseCase } from "./CreateSessionUseCase";
 
 
 class CreateSessionController {
-    async handle(request: Request, response: Response): Promise<Response> {
+    async handle(request: Request, response: Response): Promise<any> {
         try {
             const {email, password} = request.body
 
@@ -12,7 +12,7 @@ class CreateSessionController {
 
             const token = await createSessionUseCase.execute({email, password})
 
-            return response.json(token)
+            return response.json( token)
         } catch (error) {
             return response.json(error.message)
         }

@@ -21,7 +21,7 @@ interface IResponse {
 @injectable()
 class CreateSessionUseCase {
     constructor(
-        @inject("UserReposiotry")
+        @inject("UserRepository")
         private userRepository: IUserRepository
     ) {}
     
