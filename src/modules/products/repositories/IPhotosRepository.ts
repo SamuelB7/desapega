@@ -7,6 +7,7 @@ interface IRequest {
 
 interface IPhotosRepository {
     create({file, product_id}: IRequest): Promise<void>
+    update({file, product_id}: IRequest): Promise<void>
     findAllByProductId(product_id: string): Promise<ProductsPhotos[]>
 }
 

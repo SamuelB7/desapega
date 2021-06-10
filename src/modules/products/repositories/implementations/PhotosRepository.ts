@@ -14,6 +14,14 @@ class PhotosRepository implements IPhotosRepository {
         this.repository = getRepository(ProductsPhotos)
     }
 
+    async update({ file, product_id }: IRequest): Promise<void> {
+        await this.repository.query(`
+            UPDATE products_photos SET
+                file=${file}
+            WHERE product_id = ${product_id}
+        `)
+    }
+
     async create({file, product_id}: IRequest): Promise<void> {
         const photo = await this.repository.create({
             file,
