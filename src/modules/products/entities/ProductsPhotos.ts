@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from 'uuid'
+import { User } from "../../users/entities/User";
+import { Product } from "./Product";
 
 @Entity()
 class ProductsPhotos {
@@ -12,6 +14,10 @@ class ProductsPhotos {
 
     @Column()
     product_id: string
+
+    @ManyToOne(() => Product)
+    @JoinColumn({name: "product_id"})
+    product: Product
 
     constructor() {
         if(!this.id) {

@@ -56,8 +56,11 @@ class ProductRepository implements IProductRepository {
         return products
     }
 
-    async findById(id: string): Promise<Product> {
-        const product = await this.repository.findOne(id)
+    async findById(id: string): Promise<any> {
+        const product = await this.repository.find({
+            relations: ["products_photos"],
+            where: { id }
+        })
         return product
     }
 

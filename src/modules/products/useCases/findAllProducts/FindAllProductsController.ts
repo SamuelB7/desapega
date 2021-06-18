@@ -11,6 +11,9 @@ class FindAllProductsController {
             products.forEach(product => {
                 let photoPath = `${request.protocol}://${request.headers.host}/${product.file}`
                 product.file = photoPath
+
+                /* let productPrice = `R$${product.price}`
+                product.price = productPrice */
             })
 
             //console.log( `${request.protocol}://${request.headers.host}/${products[0].file}`)

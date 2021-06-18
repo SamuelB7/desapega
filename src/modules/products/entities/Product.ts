@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 }  from 'uuid'
+import { ProductsPhotos } from "./ProductsPhotos";
 
 @Entity('products')
 class Product {
@@ -24,6 +25,9 @@ class Product {
 
     @CreateDateColumn()
     created_at: Date
+
+    @OneToMany(() => ProductsPhotos, products_photos => products_photos.product)
+    products_photos: ProductsPhotos[]
 
     constructor() {
         if(!this.id) {
