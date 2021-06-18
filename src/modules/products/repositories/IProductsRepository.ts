@@ -7,7 +7,7 @@ interface IProductRepository {
     create(data: ICreateProductDTO): Promise<Product>
     findAllByName(name: string): Promise<Product[]>
     findAllByCategory(category_id: string): Promise<Product[]>
-    findAll(): Promise<Product[]>
+    findAllProducts(): Promise<Product[]>
     findById(id: string): Promise<Product>
     update(data: IUpdateProductDTO): Promise<void>
     delete(id: string): Promise<void>

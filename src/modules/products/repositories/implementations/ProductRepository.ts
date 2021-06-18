@@ -30,8 +30,15 @@ class ProductRepository implements IProductRepository {
         throw new Error("Method not implemented.");
     }
 
-    async findAll(): Promise<Product[]> {
-        const products = await this.repository.find()
+    async findAllProducts(): Promise<Product[]> {
+        const products = await this.repository.query(
+            `
+            SELECT DISTINCT ON (products.id) products.*, products_photos.file
+            FROM products
+            JOIN products_photos ON products.id = products_photos.product_id
+            `
+        )
+        
         return products
     }
 
@@ -54,8 +61,8 @@ class ProductRepository implements IProductRepository {
         return product
     }
 
-    async update({id, name, description, user_id, category_id}: IUpdateProductDTO): Promise<void> {
-        await this.repository.update(id, {name, description, user_id, category_id})
+    async update({id, name, description}: IUpdateProductDTO): Promise<void> {
+        await this.repository.update(id, {name, description})
     }
 
     async delete(id: string): Promise<void> {

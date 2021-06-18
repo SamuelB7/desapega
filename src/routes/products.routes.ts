@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { FindAllByNameController } from "../modules/products/useCases/findAllByName/FindAllByNameController";
+import { FindAllProductsController } from "../modules/products/useCases/findAllProducts/FindAllProductsController";
 import { FindByIdController } from "../modules/products/useCases/findById/FindByIdController";
 
 
 const productsRoutes = Router()
 
 const findByIdController = new FindByIdController()
-const findAllByNameController = new FindAllByNameController()
+const findAllProductsController = new FindAllProductsController()
 
 productsRoutes.get('/:id', findByIdController.handle)
-productsRoutes.get('/', findAllByNameController.handle)
+productsRoutes.get('/', findAllProductsController.handle)
 
 export { productsRoutes }
