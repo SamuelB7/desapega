@@ -27,7 +27,17 @@ class ProductRepository implements IProductRepository {
     }
 
     async findAllByCategory(category_id: string): Promise<Product[]> {
-        throw new Error("Method not implemented.");
+        const products = await this.repository.query(
+            `
+            SELECT DISTINCT ON (products.id) products.*, products_photos.file
+            FROM products
+            JOIN products_photos ON products.id = products_photos.product_id
+            AND products.category_id = '${category_id}'
+            ORDER BY products.id
+            `
+        )
+        
+        return products
     }
 
     async findAllProducts(): Promise<Product[]> {
