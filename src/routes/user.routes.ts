@@ -16,7 +16,7 @@ const updateUserController = new UpdateUserController()
 const deleteUserController = new DeleteUserController()
 
 userRoutes.get('/:id', findUserByIdController.handle)
-userRoutes.post('/', uploadAvatar.single('avatar'), createUserController.handle)
+userRoutes.post('/register', uploadAvatar.single('avatar'), createUserController.handle)
 userRoutes.patch('/:id', uploadAvatar.single('avatar'), updateUserController.handle)
 userRoutes.delete('/', deleteUserController.handle)
 

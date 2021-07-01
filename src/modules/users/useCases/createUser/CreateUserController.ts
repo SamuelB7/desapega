@@ -4,7 +4,7 @@ import { CreateUserUseCase } from "./CreateUserUseCase";
 
 
 class CreateUserController {
-    async handle(request: Request, response: Response): Promise<Response> {
+    async handle(request: Request, response: Response): Promise<any> {
         try {
             const { name, email, password, tel } = request.body
 
@@ -12,15 +12,16 @@ class CreateUserController {
 
             const createUserUseCase = container.resolve(CreateUserUseCase)
 
-            await createUserUseCase.execute({
+            const user = await createUserUseCase.execute({
                 name,
                 email,
                 password,
                 tel,
                 avatar
             })
-
-            return response.status(201).send()
+            
+            return response.redirect(process.env.DEV_CLIENT_SIDE_HOST)
+            //return response.json(user)
 
         } catch (error) {
             return response.json(error.message)

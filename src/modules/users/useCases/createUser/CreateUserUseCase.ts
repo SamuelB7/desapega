@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
+import { User } from "../../entities/User";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 
@@ -11,7 +12,7 @@ class CreateUserUseCase {
         private userRepository: IUserRepository
     ) {}
 
-    async execute({name, email, password, tel, avatar}: ICreateUserDTO): Promise<void> {
+    async execute({name, email, password, tel, avatar}: ICreateUserDTO): Promise<User> {
         const user = await this.userRepository.findByEmail(email)
         if(user) {
             throw new Error("User already registered!")
@@ -26,6 +27,8 @@ class CreateUserUseCase {
             tel,
             avatar
         })
+
+        return user
     }
 }
 
