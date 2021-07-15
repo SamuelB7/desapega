@@ -20,7 +20,7 @@ class CreateUserController {
                 avatar
             })
             
-            return response.redirect(process.env.DEV_CLIENT_SIDE_HOST)
+            return response.redirect(`${process.env.CLIENT_SIDE_HOST}/user/${user.id}`)
             //return response.json(user)
 
         } catch (error) {
